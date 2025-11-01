@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thư viện ảnh của tôi</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header>
+    <h1>Thư viện ảnh cá nhân</h1>
+  </header>
+
+  <main>
+    <section class="gallery">
+      <figure>
+        <img src="https://picsum.photos/300/200?random=1" alt="Cảnh biển buổi sáng">
+        <figcaption>Biển xanh mướt</figcaption>
+      </figure>
+      <figure>
+        <img src="https://picsum.photos/300/200?random=2" alt="Rừng thông mùa thu">
+        <figcaption>Rừng thu vàng</figcaption>
+      </figure>
+      <!-- Thêm 4 ảnh nữa với alt -->
+    </section>
+  </main>
+
+  <script>
+    // Hàm thêm hiệu ứng khi focus
+    function handleFocus(event) {
+      const figure = event.target.closest('figure');
+      if (figure) {
+        figure.style.outline = '3px solid #007bff';
+        console.log('Focus vào:', figure.querySelector('figcaption').textContent);
+      }
+    }
+
+    // Hàm khi rời focus
+    function handleBlur(event) {
+      const figure = event.target.closest('figure');
+      if (figure) {
+        figure.style.outline = '';
+        console.log('Rời focus khỏi:', figure.querySelector('figcaption').textContent);
+      }
+    }
+
+    // Hàm khởi tạo khi trang tải
+    function initGallery() {
+      const figures = document.querySelectorAll('figure');
+
+      figures.forEach((figure, index) => {
+        // Thêm tabindex để focus được
+        figure.setAttribute('tabindex', '0');
+
+        // Giữ lại mouseover/mouseleave (giả sử đã có trong CSS/JS cũ)
+        // Thêm focus/blur
+        figure.addEventListener('focus', handleFocus);
+        figure.addEventListener('blur', handleBlur);
+
+        console.log(`Đã thêm tabindex cho ảnh ${index + 1}`);
+      });
+    }
+
+    // Chạy khi trang tải xong
+    window.addEventListener('load', () => {
+      console.log('Trang đã tải xong. Khởi tạo thư viện ảnh...');
+      initGallery();
+    });
+  </script>
+</body>
+</html>
